@@ -1,0 +1,76 @@
+[
+  {
+    "value": "eggs",
+    "synonyms": [
+      "eggs",
+      "egg"
+    ]
+  },
+  {
+    "value": "carrots",
+    "synonyms": [
+      "carrot",
+      "carrots"
+    ]
+  },
+  {
+    "value": "cauliflower",
+    "synonyms": [
+      "cauliflower"
+    ]
+  },
+  {
+    "value": "cocoa",
+    "synonyms": [
+      "cocoa"
+    ]
+  },
+  {
+    "value": "tomatoes",
+    "synonyms": [
+      "tomatoes"
+    ]
+  },
+  {
+    "value": "bread",
+    "synonyms": [
+      "bread"
+    ]
+  },
+  {
+    "value": "potatoes",
+    "synonyms": [
+      "potatoes"
+    ]
+  },
+  {
+    "value": "rice",
+    "synonyms": [
+      "rice"
+    ]
+  },
+  {
+    "value": "cheese",
+    "synonyms": [
+      "cheese"
+    ]
+  },
+  {
+    "value": "pasta",
+    "synonyms": [
+      "pasta"
+    ]
+  },
+  {
+    "value": "garlic",
+    "synonyms": [
+      "garlic"
+    ]
+  },
+  {
+    "value": "banana",
+    "synonyms": [
+      "banana"
+    ]
+  }
+]

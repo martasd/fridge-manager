@@ -1,0 +1,207 @@
+[
+  {
+    "id": "7277c65d-dccf-43e9-abe8-fe8597e64c6d",
+    "data": [
+      {
+        "text": "banana",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "85665485-57e6-4e7a-bc8f-ce7c1cb011c7",
+    "data": [
+      {
+        "text": "I",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " bought ",
+        "userDefined": false
+      },
+      {
+        "text": "cocoa",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "today",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "c3fc6e20-b3fb-4fbe-bec3-39702841fda3",
+    "data": [
+      {
+        "text": "I\u0027ve got some ",
+        "userDefined": false
+      },
+      {
+        "text": "tomatoes",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "8f20e2a3-a800-4608-a185-8d7c75a0a89f",
+    "data": [
+      {
+        "text": "I have ",
+        "userDefined": false
+      },
+      {
+        "text": "bread",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "4c78302c-c810-4721-b845-c40ccd1b1d8b",
+    "data": [
+      {
+        "text": "Not much. I only have ",
+        "userDefined": false
+      },
+      {
+        "text": "cauliflower",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "64317f95-8c56-4cc3-a0c0-81a600d7d2d5",
+    "data": [
+      {
+        "text": "I have some ",
+        "userDefined": false
+      },
+      {
+        "text": "rice",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "c1c1b062-88eb-4b82-bf56-070517e56107",
+    "data": [
+      {
+        "text": "Only ",
+        "userDefined": false
+      },
+      {
+        "text": "potatoes",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "b4ecc573-95b4-4094-bc78-bd26020eece4",
+    "data": [
+      {
+        "text": "Carrots",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  },
+  {
+    "id": "638646e6-8271-4aaa-856f-6313bb9a3aec",
+    "data": [
+      {
+        "text": "I",
+        "meta": "@sys.ignore",
+        "userDefined": true
+      },
+      {
+        "text": " have ",
+        "userDefined": false
+      },
+      {
+        "text": "eggs",
+        "alias": "ingredients",
+        "meta": "@Ingredient",
+        "userDefined": true
+      },
+      {
+        "text": ".",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543683382
+  }
+]

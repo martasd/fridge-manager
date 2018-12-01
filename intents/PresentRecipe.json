@@ -1,0 +1,53 @@
+{
+  "id": "85b333f6-6a3f-4136-973a-82da035d3b2f",
+  "parentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "rootParentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "PresentRecipe",
+  "auto": true,
+  "contexts": [
+    "RecipeMatching-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "RecipeMatching.RecipeMatching-selectnumber",
+      "affectedContexts": [
+        {
+          "name": "RecipeMatching-selectnumber-followup",
+          "parameters": {},
+          "lifespan": 2
+        },
+        {
+          "name": "PresentRecipe-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "4f4dc88f-b532-4e82-90e8-dbef52b0708f",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "number",
+          "value": "$number",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543693728,
+  "fallbackIntent": false,
+  "events": []
+}

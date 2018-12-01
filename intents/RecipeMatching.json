@@ -1,0 +1,49 @@
+{
+  "id": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "RecipeMatching",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "RecipeMatching-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "b7f66f42-70f2-42d4-b791-8183ac379960",
+          "required": true,
+          "dataType": "@Ingredient",
+          "name": "ingredients",
+          "value": "$ingredients",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "You didn\u0027t enter any ingredients. Which ingredients do you have?"
+            }
+          ],
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543683382,
+  "fallbackIntent": false,
+  "events": []
+}
