@@ -18,10 +18,30 @@ app.intent('WelcomeAndLearnIngredients', (conv) => {
 app.intent('RecipeMatching', (conv, {ingredients}) => {
     console.log(ingredients);
     
-    // TODO Select a recipe (too trivial)
-    let recipe1 = new Recipe('spaghetti with ketchup and cheese', null);
-    let recipe2 = new Recipe('schnitzel with potatoes', null);
-    let recipe3 = new Recipe('risotto', null);
+    let recipe1 = new Recipe('spaghetti with ketchup and cheese', ['spaghetti','ketchup', 'cheese', 'garlic', 'onion', 'salt', 'oil']);
+    let recipe2 = new Recipe('schnitzel with potatoes', ['potatoes', 'pork', 'oil', 'flour', 'breadcrumbs', 'eggs', 'salt', 'butter']);
+    let recipe3 = new Recipe('risotto', ['rice', 'corn', 'carrot', 'onion', 'cheese', 'olives', 'mushrooms', 'salt', 'oil']);
+    
+    let recipes = [ recipe1, recipe2, recipe3 ];
+    
+    let matchedRecipes = [];
+    
+    recipes.forEach(function(recipe) { 
+        
+        let matchedIngredients = [];
+        if (recipe.ingredients.length !== 0) {
+            matchedIngredients = recipe.ingredients.filter(function(element) {
+            return ingredients.indexOf(element) > -1;
+            });
+        
+            if (matchedIngredients.length !== 0) {
+                matchedRecipes.push(recipe);
+            }
+        }
+
+    });
+
+    console.log(matchedRecipes);
     conv.contexts.set('recipe-options', 10, {"1": recipe1, "2": recipe2, "3": recipe3});
     conv.ask('These are your options. ' + recipe1.name + ', ' + recipe2.name + ', or ' + recipe3.name + '? Would you like number 1, 2, or 3?');
 })
