@@ -1,0 +1,33 @@
+{
+  "id": "38cd7a35-b224-43f7-b5aa-28c7b3648203",
+  "parentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "rootParentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "PresentNoRecipe",
+  "auto": true,
+  "contexts": [
+    "RecipeMatching-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "RecipeMatching.RecipeMatching-no",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543748568,
+  "fallbackIntent": false,
+  "events": []
+}

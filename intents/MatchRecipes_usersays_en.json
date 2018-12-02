@@ -1,0 +1,186 @@
+[
+  {
+    "id": "64e9533b-ad71-424e-9711-ad378e8a9207",
+    "data": [
+      {
+        "text": "baking powder",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543707617
+  },
+  {
+    "id": "4bb6abc6-0f1a-46e6-a6be-2ee169f15261",
+    "data": [
+      {
+        "text": "cheese",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "carrots",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "beets",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "oranges",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "strawberries",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543698660
+  },
+  {
+    "id": "5ef8f283-785e-4aab-8f67-279f52314f23",
+    "data": [
+      {
+        "text": "cheese",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "apricots",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "apples",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "oranges",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543698660
+  },
+  {
+    "id": "d315961c-6316-4815-b427-ddcaf579bbe0",
+    "data": [
+      {
+        "text": "cheese",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "carrots",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bread",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543698660
+  },
+  {
+    "id": "e045ce83-3aa1-4f30-8abb-df67563dd66c",
+    "data": [
+      {
+        "text": "carrots",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "apples",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543697402
+  },
+  {
+    "id": "6902032f-bbc5-4e12-9ddf-8edb5f0e2ac8",
+    "data": [
+      {
+        "text": "potatoes",
+        "alias": "ingredients",
+        "meta": "@sys.any",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 1543697402
+  }
+]

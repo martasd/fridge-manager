@@ -1,0 +1,33 @@
+{
+  "id": "a47ba50f-6ac5-4685-81d7-87846ab838bc",
+  "parentId": "bc580c74-04b9-42b2-ae80-7668c8192352",
+  "rootParentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "SingleFinish",
+  "auto": true,
+  "contexts": [
+    "PresentSingleRecipe-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "RecipeMatching.RecipeMatching-yes.PresentSingleRecipe-no",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543751693,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,51 @@
+{
+  "id": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "MatchRecipes",
+  "auto": true,
+  "contexts": [
+    "welcome"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [
+        {
+          "name": "RecipeMatching-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "ce9685d1-67c1-4cbc-a990-c9e2af9bcbb0",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ingredients",
+          "value": "$ingredients",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "Please tell me some ingredients."
+            }
+          ],
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543748885,
+  "fallbackIntent": false,
+  "events": []
+}
