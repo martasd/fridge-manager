@@ -2,6 +2,7 @@ const functions = require('firebase-functions')
 
 const {
   dialogflow,
+  SimpleResponse
 } = require('actions-on-google')
 
 const app = dialogflow()
@@ -17,23 +18,35 @@ function PresentRecipe(conv, number) {
     conv.ask('Wonderful. Excellent choice! Would you like assistance with cooking ' + chosenRecipe.name + '?');
 }
 
-function RedirectToCookingAssistant(conv) {
+function RedirectToCookingApp(conv) {
     let chosenRecipe = conv.user.storage.currentRecipe;
     conv.close('To enlist a cooking assistant to guide you while you cook, say: find me ' + chosenRecipe.name + ' to Google assistant after leaving this application. Bon appetit!');
 }
 
-function NoCookingAssistant(conv) {
+function Finish(conv) {
     conv.close('You must be a pro then. Good luck and bon appetit!');
+}
+
+function NoRecipe(conv, single) {
+    conv.close('Unfortunately, we have not found any ' + single + ' matching recipe for your ingredients. You might consider paying a visit to a grocery store.');
 }
 
 // How many recipes to select?
 const maxSelectedNum = 3;
 
 app.intent('WelcomeAndLearnIngredients', (conv) => {
+    // conv.ask(new SimpleResponse({
+    //     text: 'Text',
+    //     speech: `<speak>
+    //     Welcome to Fridge Manager.
+    //     <audio src="https://firebasestorage.googleapis.com/v0/b/fridgemanager-b42cf.appspot.com/o/success-fanfare.wav?alt=media&token=d6f80e78-7c9c-451c-8b2d-ca9afb1eabca">No audio!</audio> 
+    //     Which ingredients do you have available? For example, you can say onion, potatoes, and pineapple.</speak>`
+    // }))
+    // conv.ask('<speak>Okay, thank you for making a coffee. <audio src="https://actions.google.com/sounds/v1/cartoon/magic_chime.ogg" clipEnd="5s" clipBegin="1s"></audio> Do you need anything else?</speak>');
     conv.ask('Welcome to Fridge Manager. Which ingredients do you have available? For example, you can say onion, potatoes, and pineapple.');
 })
 
-app.intent('RecipeMatching', (conv, {ingredients}) => {
+app.intent('MatchRecipes', (conv, {ingredients}) => {
     console.log(ingredients);
     
     // Test recipes
@@ -114,7 +127,7 @@ app.intent('RecipeMatching', (conv, {ingredients}) => {
     }
     else {
         // We don't have any possible recipes to offer 
-        conv.close('Unfortunately, we have not found any matching recipe for your ingredients. You might consider paying a visit to a grocery store.');
+        NoRecipe(conv, '');
     }
 })
 
@@ -126,20 +139,24 @@ app.intent('PresentSingleRecipe', (conv) => {
     PresentRecipe(conv, 1);
 })
 
-app.intent('RedirectToCookingAssistant', (conv) => {
-    RedirectToCookingAssistant(conv);
+app.intent('PresentNoRecipe', (conv) => {
+    NoRecipe(conv, 'other');
 })
 
-app.intent('NoCookingAssistant', (conv) => {
-    NoCookingAssistant(conv);
+app.intent('RedirectToCookingApp', (conv) => {
+    RedirectToCookingApp(conv);
 })
 
-app.intent('RedirectToCookingAssistantSingle', (conv) => {
-    RedirectToCookingAssistant(conv);
+app.intent('Finish', (conv) => {
+    Finish(conv);
 })
 
-app.intent('NoCookingAssistantSingle', (conv) => {
-    NoCookingAssistant(conv);
+app.intent('RedirectSingleToCookingApp', (conv) => {
+    RedirectToCookingApp(conv);
+})
+
+app.intent('SingleFinish', (conv) => {
+    Finish(conv);
 })
 
 
