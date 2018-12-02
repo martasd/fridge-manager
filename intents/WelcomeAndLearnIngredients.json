@@ -6,7 +6,13 @@
   "responses": [
     {
       "resetContexts": false,
-      "affectedContexts": [],
+      "affectedContexts": [
+        {
+          "name": "welcome",
+          "parameters": {},
+          "lifespan": 1
+        }
+      ],
       "parameters": [],
       "messages": [],
       "defaultResponsePlatforms": {},
@@ -16,7 +22,7 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1543683068,
+  "lastUpdate": 1543742779,
   "fallbackIntent": false,
   "events": [
     {

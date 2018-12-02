@@ -1,0 +1,33 @@
+{
+  "id": "42bf031c-a69e-4735-881f-685948c4e677",
+  "parentId": "bc580c74-04b9-42b2-ae80-7668c8192352",
+  "rootParentId": "f222a5a5-7755-42ff-b8e1-da5d9e8c7ba6",
+  "name": "RedirectToCookingAssistantSingle",
+  "auto": true,
+  "contexts": [
+    "PresentSingleRecipe-followup"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "RecipeMatching.RecipeMatching-yes.PresentSingleRecipe-yes",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1543738987,
+  "fallbackIntent": false,
+  "events": []
+}

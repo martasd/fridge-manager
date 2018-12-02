@@ -11,6 +11,21 @@ function Recipe(name, ingredients) {
     this.ingredients = ingredients;
 }
 
+function PresentRecipe(conv, number) {
+    let chosenRecipe = conv.contexts.get('recipe-options').parameters[number];
+    conv.user.storage.currentRecipe = chosenRecipe;
+    conv.ask('Wonderful. Excellent choice! Would you like assistance with cooking ' + chosenRecipe.name + '?');
+}
+
+function RedirectToCookingAssistant(conv) {
+    let chosenRecipe = conv.user.storage.currentRecipe;
+    conv.close('To enlist a cooking assistant to guide you while you cook, say: find me ' + chosenRecipe.name + ' to Google assistant after leaving this application. Bon appetit!');
+}
+
+function NoCookingAssistant(conv) {
+    conv.close('You must be a pro then. Good luck and bon appetit!');
+}
+
 // How many recipes to select?
 const maxSelectedNum = 3;
 
@@ -50,43 +65,49 @@ app.intent('RecipeMatching', (conv, {ingredients}) => {
     let selectedNum = selectedRecipes.length;
     let lastIndex = selectedNum - 1;
     
+    let optionsQuery = '';
     let recipeOptions = {};
-    let optionsQuery = 'These are your options: ';
-    selectedRecipes.forEach(function(recipe, index, selectedRecipes) {
-        // Save the retrieved recipes to context
-        recipeOptions[index+1] = recipe;
+    if (selectedNum == 1) {
+        recipeOptions[1] = selectedRecipes[0];
+        optionsQuery += 'Your only option is: ' + selectedRecipes[0].name + '. Would you like to cook this one today?';
+    }
+    else {
+        optionsQuery += 'These are your options: ';
+        selectedRecipes.forEach(function(recipe, index, selectedRecipes) {
+            // Save the retrieved recipes to context
+            recipeOptions[index+1] = recipe;
+            
+            // List the options to the user
+            optionsQuery += recipe.name;
+            
+            if (index == lastIndex) {
+                optionsQuery += '. ';
+            }
+            else if (index == lastIndex-1)  {
+                optionsQuery += ', and ';
+            }
+            else {
+                optionsQuery += ', ';
+            }
+        })
+        optionsQuery += 'Which one would you like choose? Option '
         
-        // List the options to the user
-        optionsQuery += recipe.name;
-        
-        if (index == lastIndex) {
-            optionsQuery += '. ';
-        }
-        else if (index == lastIndex-1)  {
-            optionsQuery += ', and ';
-        }
-        else {
-            optionsQuery += ', ';
-        }
-    })
-    optionsQuery += 'Which one would you like choose? Option '
+        for (let i = 0; i < selectedNum; i++) {
+             
+            // We start counting from 0, but most users start with 1:)
+            optionsQuery += i+1;
     
-    for (let i = 0; i < selectedNum; i++) {
-         
-        // We start counting from 0, but most users start with 1:)
-        optionsQuery += i+1;
-
-        if (i == lastIndex) {
-            optionsQuery += '?';
-        }
-        else if (i == lastIndex-1)  {
-            optionsQuery += ', or ';
-        }
-        else {
-            optionsQuery += ', ';
+            if (i == lastIndex) {
+                optionsQuery += '?';
+            }
+            else if (i == lastIndex-1)  {
+                optionsQuery += ', or ';
+            }
+            else {
+                optionsQuery += ', ';
+            }
         }
     }
-
     if (selectedRecipes.length !== 0) {
         conv.contexts.set('recipe-options', 10, recipeOptions);
         conv.ask(optionsQuery);
@@ -98,19 +119,29 @@ app.intent('RecipeMatching', (conv, {ingredients}) => {
 })
 
 app.intent('PresentRecipe', (conv, {number}) => {
-    let chosenRecipe = conv.contexts.get('recipe-options').parameters[number];
-    conv.user.storage.currentRecipe = chosenRecipe;
-    conv.ask('Wonderful. Excellent choice! Would you like assistance with cooking ' + chosenRecipe.name + '?');
+    PresentRecipe(conv, number);
+})
+
+app.intent('PresentSingleRecipe', (conv) => {
+    PresentRecipe(conv, 1);
 })
 
 app.intent('RedirectToCookingAssistant', (conv) => {
-    let chosenRecipe = conv.user.storage.currentRecipe;
-    conv.close('Say: find me ' + chosenRecipe.name + 'to Google assistant after leaving this application. Bon appetit!');
+    RedirectToCookingAssistant(conv);
 })
 
 app.intent('NoCookingAssistant', (conv) => {
-    conv.close('You must be a pro then. Good luck and goodbye!');
+    NoCookingAssistant(conv);
 })
+
+app.intent('RedirectToCookingAssistantSingle', (conv) => {
+    RedirectToCookingAssistant(conv);
+})
+
+app.intent('NoCookingAssistantSingle', (conv) => {
+    NoCookingAssistant(conv);
+})
+
 
 app.intent('Default Fallback Intent', conv => {
   conv.ask(`I didn't catch that. Can you tell me something else?`)

@@ -111,11 +111,11 @@
     "id": "6c91f3b2-de9e-4fa0-9a53-6e9fcaa1bc5a",
     "data": [
       {
-        "text": "give me number",
+        "text": "give me number ",
         "userDefined": false
       },
       {
-        "text": " 3",
+        "text": "3",
         "alias": "number",
         "meta": "@sys.number",
         "userDefined": true
