@@ -3,13 +3,13 @@
 # DONE
 
 - Register for paid account
+- Retrieve matched recipes from a server API and present them to the user
+- Implement returning a Promise from unirest API call
 
 # TODO
 
-- Retrieve matched recipes from a server API
-- Connect with Chefling
+- Connect to an online ordering system
 - Skóre pro důležitost suroviny v receptu
-- Connect to barcode scanner application from Globus or iTesco
 - Automatická aktualizace seznamu věcí (např. z předešlých dní, nákupu online…)
 - Filtry nabízených receptů (čas, kuchyně, jednoduchost, sladké/slané, oblíbené…)
 - Napojení na průvodce vařením receptů

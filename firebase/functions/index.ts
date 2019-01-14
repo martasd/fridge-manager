@@ -53,53 +53,9 @@ app.intent('WelcomeAndLearnIngredients', conv => {
   );
 });
 
-app.intent('MatchRecipes', (conv, params: object) => {
-  let ingredients: string[] = params['ingredients'];
-  console.log(ingredients);
-
-  // Test recipes
-  // let recipe1 = new Recipe('spaghetti with ketchup and cheese', [
-  //   'spaghetti',
-  //   'ketchup',
-  //   'cheese',
-  //   'garlic',
-  //   'onion',
-  //   'salt',
-  //   'oil'
-  // ]);
-  // let recipe2 = new Recipe('schnitzel with potatoes', [
-  //   'potatoes',
-  //   'pork',
-  //   'oil',
-  //   'flour',
-  //   'breadcrumbs',
-  //   'eggs',
-  //   'salt',
-  //   'butter'
-  // ]);
-  // let recipe3 = new Recipe('risotto', [
-  //   'rice',
-  //   'corn',
-  //   'carrot',
-  //   'onion',
-  //   'cheese',
-  //   'olives',
-  //   'mushrooms',
-  //   'salt',
-  //   'oil'
-  // ]);
-  // let recipe4 = new Recipe('pancakes', [
-  //   'milk',
-  //   'flour',
-  //   'sugar',
-  //   'eggs',
-  //   'baking powder',
-  //   'salt',
-  //   'oil'
-  // ]);
-  // let recipes = [recipe1, recipe2, recipe3, recipe4];
-
-  // Retrieve matched recipes from Spoonacular
+// Retrieve matched recipes from Spoonacular
+function fetchRecipes(ingredients, selectedRecipes) {
+  // Contruct the API request string
   let getString: string =
     'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=3&ranking=1&ingredients=';
   ingredients.forEach((ingredient: string, index: number) => {
@@ -108,39 +64,41 @@ app.intent('MatchRecipes', (conv, params: object) => {
       getString += '%2C';
     }
   });
+
   console.log(getString);
 
-  let selectedRecipes = [];
-  const response = unirest
-    .get(getString)
-    .header(
-      'X-RapidAPI-Key',
-      'bcd6824181msh975176809d91b13p14cf9djsn709a7caa5d1c'
-    )
-    .end(function(result) {
-      console.log(result.status, result.headers, result.body);
-      result.body.forEach(recipe => {
-        selectedRecipes.push(recipe);
+  // External API call needs to return a Promise
+  return new Promise((resolve, reject) => {
+    unirest
+      .get(getString)
+      .header(
+        'X-RapidAPI-Key',
+        'bcd6824181msh975176809d91b13p14cf9djsn709a7caa5d1c'
+      )
+      .end(function(response) {
+        if (response) {
+          console.log(response.status, response.headers, response.body);
+          response.body.forEach(recipe => {
+            console.log('recipe: ' + JSON.stringify(recipe));
+            selectedRecipes.push(recipe);
+            resolve(selectedRecipes);
+          });
+        } else {
+          reject('Error fetching recipes from API.');
+        }
       });
-    });
+  });
+}
 
-  // // Determine matched recipes
-  // recipes.forEach(recipe => {
-  //   let matchedIngredients = [];
-  //   if (recipe.ingredients.length !== 0) {
-  //     matchedIngredients = recipe.ingredients.filter(element => {
-  //       return ingredients.indexOf(element) > -1;
-  //     });
+app.intent('MatchRecipes', async (conv, params: object) => {
+  let ingredients: string[] = params['ingredients'];
+  let selectedRecipes: any[] = [];
+  console.log(ingredients);
 
-  //     if (matchedIngredients.length !== 0) {
-  //       matchedRecipes.push(recipe);
-  //     }
-  //   }
-  // });
+  await fetchRecipes(ingredients, selectedRecipes);
 
-  // Select the highest ranked recipes
-  // let selectedRecipes = matchedRecipes.slice(0, maxSelectedNum);
-  console.log('Recipes: ' + selectedRecipes);
+  console.log('selected: ' + JSON.stringify(selectedRecipes));
+  console.log('length: ' + selectedRecipes.length);
   let selectedNum = selectedRecipes.length;
   let lastIndex = selectedNum - 1;
 
