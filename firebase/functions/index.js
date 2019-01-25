@@ -34,8 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
 exports.__esModule = true;
+var _a;
+var _this = this;
+var actions_on_google_1 = require("actions-on-google");
 var unirest = require('unirest');
 var functions = require('firebase-functions');
 var dialogflow = require('actions-on-google').dialogflow;
@@ -81,7 +83,7 @@ function fetchRecipes(ingredients, selectedRecipes) {
         }
     });
     console.log(getString);
-    // External API call needs to return a Promise
+    // External API call returns a Promise
     return new Promise(function (resolve, reject) {
         unirest
             .get(getString)
@@ -102,7 +104,7 @@ function fetchRecipes(ingredients, selectedRecipes) {
     });
 }
 app.intent('MatchRecipes', function (conv, params) { return __awaiter(_this, void 0, void 0, function () {
-    var ingredients, selectedRecipes, selectedNum, lastIndex, optionsQuery, recipeOptions, i;
+    var ingredients, selectedRecipes, selectedNum, lastIndex, listItems, responses;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -113,53 +115,58 @@ app.intent('MatchRecipes', function (conv, params) { return __awaiter(_this, voi
             case 1:
                 _a.sent();
                 console.log('selected: ' + JSON.stringify(selectedRecipes));
-                console.log('length: ' + selectedRecipes.length);
                 selectedNum = selectedRecipes.length;
                 lastIndex = selectedNum - 1;
-                optionsQuery = '';
-                recipeOptions = {};
-                if (selectedNum == 1) {
-                    recipeOptions[1] = selectedRecipes[0];
-                    optionsQuery +=
-                        'Your only option is: ' +
-                            selectedRecipes[0].title +
-                            '. Would you like to cook this one today?';
-                }
-                else {
-                    optionsQuery += 'These are your options: ';
-                    selectedRecipes.forEach(function (recipe, index, selectedRecipes) {
-                        // Save the retrieved recipes to context
-                        recipeOptions[index + 1] = recipe;
-                        // List the options to the user
-                        optionsQuery += recipe.title;
-                        if (index == lastIndex) {
-                            optionsQuery += '. ';
-                        }
-                        else if (index == lastIndex - 1) {
-                            optionsQuery += ', and ';
-                        }
-                        else {
-                            optionsQuery += ', ';
-                        }
-                    });
-                    optionsQuery += 'Which one would you like choose? Option ';
-                    for (i = 0; i < selectedNum; i++) {
-                        // We start counting from 0, but most users start with 1:)
-                        optionsQuery += i + 1;
-                        if (i == lastIndex) {
-                            optionsQuery += '?';
-                        }
-                        else if (i == lastIndex - 1) {
-                            optionsQuery += ', or ';
-                        }
-                        else {
-                            optionsQuery += ', ';
-                        }
-                    }
-                }
+                listItems = {};
+                selectedRecipes.forEach(function (recipe, index) {
+                    listItems[index] = {
+                        title: recipe.title,
+                        description: recipe.title,
+                        image: new actions_on_google_1.Image({
+                            url: recipe.image,
+                            alt: recipe.title
+                        })
+                    };
+                });
+                // let optionsQuery = '';
+                // let recipeOptions = {};
+                // if (selectedNum == 1) {
+                //   recipeOptions[1] = selectedRecipes[0];
+                //   optionsQuery +=
+                //     'Your only option is: ' +
+                //     selectedRecipes[0].title +
+                //     '. Would you like to cook this one today?';
+                // } else {
+                //   optionsQuery += 'These are your options: ';
+                //   selectedRecipes.forEach((recipe, index, selectedRecipes) => {
+                //     // Save the retrieved recipes to context
+                //     recipeOptions[index + 1] = recipe;
+                //     // List the options to the user
+                //     optionsQuery += recipe.title;
+                //     if (index == lastIndex) {
+                //       optionsQuery += '. ';
+                //     } else if (index == lastIndex - 1) {
+                //       optionsQuery += ', and ';
+                //     } else {
+                //       optionsQuery += ', ';
+                //     }
+                //   });
+                //   optionsQuery += 'Which one would you like choose? Option ';
+                //   for (let i = 0; i < selectedNum; i++) {
+                //     // We start counting from 0, but most users start with 1:)
+                //     optionsQuery += i + 1;
+                //     if (i == lastIndex) {
+                //       optionsQuery += '?';
+                //     } else if (i == lastIndex - 1) {
+                //       optionsQuery += ', or ';
+                //     } else {
+                //       optionsQuery += ', ';
+                //     }
+                //   }
+                // }
                 if (selectedRecipes.length !== 0) {
-                    conv.contexts.set('recipe-options', 10, recipeOptions);
-                    conv.ask(optionsQuery);
+                    responses = [];
+                    conv.ask([new actions_on_google_1.List({ title: 'Selected recipes', items: listItems })]);
                 }
                 else {
                     // We don't have any possible recipes to offer
@@ -169,6 +176,18 @@ app.intent('MatchRecipes', function (conv, params) { return __awaiter(_this, voi
         }
     });
 }); });
+var SELECTED_ITEM_RESPONSES = (_a = {},
+    _a[0] = 'You selected the first item',
+    _a[1] = 'You selected the second item',
+    _a[2] = 'You selected the third item',
+    _a);
+app.intent('actions.intent.OPTION', function (conv, params, option) {
+    var response = 'You did not select any item';
+    if (option && SELECTED_ITEM_RESPONSES.hasOwnProperty(option)) {
+        response = SELECTED_ITEM_RESPONSES[option];
+    }
+    conv.ask(response);
+});
 app.intent('PresentRecipe', function (conv, _a) {
     var number = _a.number;
     presentRecipe(conv, number);

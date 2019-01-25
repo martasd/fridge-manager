@@ -1,4 +1,10 @@
-import { Conversation } from 'actions-on-google';
+import {
+  Conversation,
+  Image,
+  Response,
+  SimpleResponse,
+  List
+} from 'actions-on-google';
 
 const unirest = require('unirest');
 
@@ -67,7 +73,7 @@ function fetchRecipes(ingredients, selectedRecipes) {
 
   console.log(getString);
 
-  // External API call needs to return a Promise
+  // External API call returns a Promise
   return new Promise((resolve, reject) => {
     unirest
       .get(getString)
@@ -98,57 +104,84 @@ app.intent('MatchRecipes', async (conv, params: object) => {
   await fetchRecipes(ingredients, selectedRecipes);
 
   console.log('selected: ' + JSON.stringify(selectedRecipes));
-  console.log('length: ' + selectedRecipes.length);
   let selectedNum = selectedRecipes.length;
   let lastIndex = selectedNum - 1;
 
-  let optionsQuery = '';
-  let recipeOptions = {};
-  if (selectedNum == 1) {
-    recipeOptions[1] = selectedRecipes[0];
-    optionsQuery +=
-      'Your only option is: ' +
-      selectedRecipes[0].title +
-      '. Would you like to cook this one today?';
-  } else {
-    optionsQuery += 'These are your options: ';
-    selectedRecipes.forEach((recipe, index, selectedRecipes) => {
-      // Save the retrieved recipes to context
-      recipeOptions[index + 1] = recipe;
+  let listItems = {};
+  selectedRecipes.forEach((recipe, index) => {
+    listItems[index] = {
+      title: recipe.title,
+      description: recipe.title,
+      image: new Image({
+        url: recipe.image,
+        alt: recipe.title
+      })
+    };
+  });
+  // let optionsQuery = '';
+  // let recipeOptions = {};
+  // if (selectedNum == 1) {
+  //   recipeOptions[1] = selectedRecipes[0];
+  //   optionsQuery +=
+  //     'Your only option is: ' +
+  //     selectedRecipes[0].title +
+  //     '. Would you like to cook this one today?';
+  // } else {
+  //   optionsQuery += 'These are your options: ';
+  //   selectedRecipes.forEach((recipe, index, selectedRecipes) => {
+  //     // Save the retrieved recipes to context
+  //     recipeOptions[index + 1] = recipe;
 
-      // List the options to the user
-      optionsQuery += recipe.title;
+  //     // List the options to the user
+  //     optionsQuery += recipe.title;
 
-      if (index == lastIndex) {
-        optionsQuery += '. ';
-      } else if (index == lastIndex - 1) {
-        optionsQuery += ', and ';
-      } else {
-        optionsQuery += ', ';
-      }
-    });
-    optionsQuery += 'Which one would you like choose? Option ';
+  //     if (index == lastIndex) {
+  //       optionsQuery += '. ';
+  //     } else if (index == lastIndex - 1) {
+  //       optionsQuery += ', and ';
+  //     } else {
+  //       optionsQuery += ', ';
+  //     }
+  //   });
+  //   optionsQuery += 'Which one would you like choose? Option ';
 
-    for (let i = 0; i < selectedNum; i++) {
-      // We start counting from 0, but most users start with 1:)
-      optionsQuery += i + 1;
+  //   for (let i = 0; i < selectedNum; i++) {
+  //     // We start counting from 0, but most users start with 1:)
+  //     optionsQuery += i + 1;
 
-      if (i == lastIndex) {
-        optionsQuery += '?';
-      } else if (i == lastIndex - 1) {
-        optionsQuery += ', or ';
-      } else {
-        optionsQuery += ', ';
-      }
-    }
-  }
+  //     if (i == lastIndex) {
+  //       optionsQuery += '?';
+  //     } else if (i == lastIndex - 1) {
+  //       optionsQuery += ', or ';
+  //     } else {
+  //       optionsQuery += ', ';
+  //     }
+  //   }
+  // }
+
   if (selectedRecipes.length !== 0) {
-    conv.contexts.set('recipe-options', 10, recipeOptions);
-    conv.ask(optionsQuery);
+    // conv.contexts.set('recipe-options', 10, recipeOptions);
+
+    // Present a carousel
+    conv.ask([new List({ title: 'Selected recipes', items: listItems })]);
   } else {
     // We don't have any possible recipes to offer
     noRecipe(conv, '');
   }
+});
+
+const SELECTED_ITEM_RESPONSES = {
+  [0]: 'You selected the first item',
+  [1]: 'You selected the second item',
+  [2]: 'You selected the third item'
+};
+
+app.intent('actions.intent.OPTION', (conv, params, option) => {
+  let response = 'You did not select any item';
+  if (option && SELECTED_ITEM_RESPONSES.hasOwnProperty(option)) {
+    response = SELECTED_ITEM_RESPONSES[option];
+  }
+  conv.ask(response);
 });
 
 app.intent('PresentRecipe', (conv, { number }) => {
